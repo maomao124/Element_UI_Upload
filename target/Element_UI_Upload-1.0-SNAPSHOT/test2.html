@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<!--
+Project name(项目名称)：Element_UI_Upload
+  File name(文件名): test2
+  Authors(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/4/30
+  Time(创建时间)： 13:44
+  Description(描述)： 无
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/element-ui.css">
+    <script src="js/vue.js"></script>
+    <script src="js/element-ui.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <el-upload action="#"
+               :on-preview="handlePreview"
+               :on-remove="handleRemove"
+               :show-file-list="false"
+               :before-upload="beforeAvatarUpload"
+               :before-remove="beforeRemove"
+               :limit="3"
+               accept=".jpg,.png"
+               :on-exceed="handleExceed"
+               :file-list="fileList">
+        <el-button type="primary">点击上传</el-button>
+        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+    </el-upload>
+</div>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            fileList: [],
+
+        },
+        methods: {
+            handleRemove(file, fileList)
+            {
+                console.log(file, fileList);
+            },
+            beforeAvatarUpload(file)
+            {
+                const isJPG = file.type === 'image/jpeg';
+                const isLt2M = file.size / 1024 / 1024 < 2;
+                if (!isJPG)
+                {
+                    this.$message.error('上传头像图片只能是 JPG 格式!');
+                }
+                if (!isLt2M)
+                {
+                    this.$message.error('上传头像图片大小不能超过 2MB!');
+                }
+                return isJPG && isLt2M;
+            },
+            handlePreview(file)
+            {
+                console.log(file);
+            },
+            handleExceed(files, fileList)
+            {
+                this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+            },
+            beforeRemove(file, fileList)
+            {
+                return this.$confirm(`确定移除 ${file.name}？`);
+            }
+        },
+        mounted()
+        {
+
+        }
+    })
+</script>
+</body>
+</html>

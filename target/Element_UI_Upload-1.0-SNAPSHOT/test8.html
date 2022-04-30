@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<!--
+Project name(项目名称)：Element_UI_Upload
+  File name(文件名): test8
+  Authors(作者）: mao
+  Author QQ：1296193245
+  GitHub：https://github.com/maomao124/
+  Date(创建日期)： 2022/4/30
+  Time(创建时间)： 14:16
+  Description(描述)： 无
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/element-ui.css">
+    <script src="js/vue.js"></script>
+    <script src="js/element-ui.js"></script>
+    <style>
+        .el-button {
+            margin: 10px 125px 10px 125px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="app">
+    <div style="width:800px;text-align: center">
+        <el-upload
+                action="#"
+                ref="upload"
+                :on-remove="handleRemove"
+                :on-preview="handlePreview"
+                :file-list="fileList"
+                multiple
+                drag
+                :auto-upload="false"
+                list-type="picture">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <!--        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>-->
+            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+        <el-button size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            fileList: [],
+
+        },
+        methods: {
+            handleRemove(file, fileList)
+            {
+                console.log(file, fileList);
+            },
+            submitUpload()
+            {
+                console.log("上传")
+                this.$refs.upload.submit();
+            },
+            handlePreview(file)
+            {
+                console.log(file);
+            }
+        },
+        mounted()
+        {
+
+        }
+    })
+</script>
+</body>
+</html>
