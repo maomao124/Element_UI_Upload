@@ -19,29 +19,33 @@ Project name(项目名称)：Element_UI_Upload
     <script src="js/vue.js"></script>
     <script src="js/element-ui.js"></script>
     <style>
-
+        .el-button {
+            margin: 10px 125px 10px 125px;
+        }
     </style>
 
 </head>
 <body>
 
 <div id="app">
-    <el-upload
-            action="#"
-            ref="upload"
-            :on-remove="handleRemove"
-            :on-preview="handlePreview"
-            :file-list="fileList"
-            multiple
-            drag
-            :auto-upload="false"
-            list-type="picture">
-        <i class="el-icon-upload"></i>
-        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-        <!--        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>-->
-        <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-    </el-upload>
-    <el-button style="margin: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+    <div style="width:800px;text-align: center">
+        <el-upload
+                action="#"
+                ref="upload"
+                :on-remove="handleRemove"
+                :on-preview="handlePreview"
+                :file-list="fileList"
+                multiple
+                drag
+                :auto-upload="false"
+                list-type="picture">
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <!--        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>-->
+            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+        <el-button size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+    </div>
 </div>
 
 <script>
